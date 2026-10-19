@@ -172,31 +172,31 @@ export default function AboutPage(): JSX.Element {
         {/* Hardcoded left-to-right layout with dots and hover tooltips */}
         <div className="flex flex-row flex-wrap items-center justify-center gap-3">
           <div className="group relative">
-            <CSharpIcon className="h-4 w-4" />
+            <CSharpIcon className="h-6 w-6" />
           </div>
 
           <span className="-my-1 text-xl text-secondary select-none">•</span>
 
           <div className="group relative">
-            <TypescriptIcon className="h-4 w-4" />
+            <TypescriptIcon className="h-6 w-6" />
           </div>
 
           <span className="-my-1 text-xl text-secondary select-none">•</span>
 
           <div className="group relative">
-            <UnityIcon className="h-4 w-4" />
+            <UnityIcon className="h-6 w-6" />
           </div>
 
           <span className="-my-1 text-xl text-secondary select-none">•</span>
 
           <div className="group relative">
-            <MysqlIcon className="h-4 w-4" />
+            <MysqlIcon className="h-6 w-6" />
           </div>
 
           <span className="-my-1 text-xl text-secondary select-none">•</span>
 
           <div className="group relative">
-            <HtmlIcon className="h-4 w-4" />
+            <HtmlIcon className="h-6 w-6" />
           </div>
         </div>
 

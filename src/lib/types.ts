@@ -32,7 +32,6 @@ export interface ContactData {
   email?: string
   phone?: string
   discord?: string
-  twitter?: string
   linkedin?: string
 }
 

@@ -92,23 +92,6 @@ export default function ContactPage(): JSX.Element {
             </Card>
           ) : null}
 
-          {data?.twitter ? (
-            <Card>
-              <CardContent>
-                <h1 className="mb-2 text-xl">X / Twitter</h1>
-                <Button className="px-2 py-2 text-lg text-primary-foreground">
-                  <a
-                    href={data.twitter}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Open Link
-                  </a>
-                </Button>
-              </CardContent>
-            </Card>
-          ) : null}
-
           {data?.phone ? (
             <Card>
               <CardContent>

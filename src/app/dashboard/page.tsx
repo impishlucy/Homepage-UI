@@ -571,11 +571,6 @@ export default function DashboardPage() {
               onChange={(v) => patchContact({ discord: v })}
             />
             <Field
-              label="Twitter"
-              value={data.contact?.twitter ?? ""}
-              onChange={(v) => patchContact({ twitter: v })}
-            />
-            <Field
               label="Linkedin"
               value={data.contact?.linkedin ?? ""}
               onChange={(v) => patchContact({ linkedin: v })}

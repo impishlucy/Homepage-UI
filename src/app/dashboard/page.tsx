@@ -53,11 +53,11 @@ function normalizeProjectIds(projects: Project[]): Project[] {
 }
 
 function Field({
-  label,
-  value,
-  onChange,
-  multiline = false,
-}: {
+                 label,
+                 value,
+                 onChange,
+                 multiline = false,
+               }: {
   label: string
   value: string | number | undefined
   onChange: (v: string) => void
@@ -84,10 +84,10 @@ function Field({
 }
 
 function SaveButton({
-  saving,
-  section,
-  onClick,
-}: {
+                      saving,
+                      section,
+                      onClick,
+                    }: {
   saving: SaveSection | null
   section: SaveSection
   onClick: () => void
@@ -211,9 +211,9 @@ export default function DashboardPage() {
                 ? targetData.imprint
                 : section === "projects"
                   ? {
-                      ...(targetData.projects ?? { projects: [] }),
-                      projects: currentProjects,
-                    }
+                    ...(targetData.projects ?? { projects: [] }),
+                    projects: currentProjects,
+                  }
                   : null
 
       const res = await authFetch(`${apiBaseUrl}/admin/update/${section}`, {
@@ -227,12 +227,12 @@ export default function DashboardPage() {
         setData((d) =>
           d
             ? {
-                ...d,
-                projects: {
-                  ...(d.projects ?? { projects: [] }),
-                  projects: currentProjects,
-                },
-              }
+              ...d,
+              projects: {
+                ...(d.projects ?? { projects: [] }),
+                projects: currentProjects,
+              },
+            }
             : d
         )
       }
@@ -322,15 +322,15 @@ export default function DashboardPage() {
     setData((d) =>
       d
         ? {
-            ...d,
-            user: {
-              ...(d.user ?? {}),
-              links: {
-                ...(d.user?.links ?? {}),
-                ...patch,
-              },
+          ...d,
+          user: {
+            ...(d.user ?? {}),
+            links: {
+              ...(d.user?.links ?? {}),
+              ...patch,
             },
-          }
+          },
+        }
         : d
     )
   }
@@ -632,18 +632,21 @@ export default function DashboardPage() {
 
             <label className="block space-y-1 text-left">
               <span className="text-xs font-medium text-muted-foreground">
-                Age
+                Birth Date
               </span>
               <input
-                type="number"
+                type="date"
                 className={inputCls}
-                value={data.about?.age ?? ""}
+                value={
+                  data.about?.birthDate
+                    ? data.about.birthDate.split("T")[0]
+                    : ""
+                }
                 onChange={(e) =>
                   patchAbout({
-                    age:
-                      e.target.value === ""
-                        ? undefined
-                        : Number(e.target.value),
+                    birthDate: e.target.value
+                      ? `${e.target.value}T00:00:00Z`
+                      : undefined,
                   })
                 }
               />

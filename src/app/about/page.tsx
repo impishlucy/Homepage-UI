@@ -4,7 +4,6 @@ import { useState, useEffect, JSX } from "react"
 import type { AboutData } from "@/lib/types"
 import { Card, CardContent } from "@/components/ui/card"
 import { SVGProps } from "react"
-import { Spinner } from "@/components/ui/spinner"
 
 // Using https://logos.lndev.me/ Expand / Edit this to your needs.
 
@@ -102,6 +101,23 @@ export function MysqlIcon(props: SVGProps<SVGSVGElement>) {
   )
 }
 
+const calculateAge = (birthDateString?: string): string => {
+  if (!birthDateString) return "Unknown"
+  const birthDate = new Date(birthDateString)
+  const today = new Date()
+  let age = today.getFullYear() - birthDate.getFullYear()
+  const monthDifference = today.getMonth() - birthDate.getMonth()
+
+  if (
+    monthDifference < 0 ||
+    (monthDifference === 0 && today.getDate() < birthDate.getDate())
+  ) {
+    age--
+  }
+
+  return age.toString()
+}
+
 const formatDate = (dateString?: string) => {
   if (!dateString) return "Present"
   return new Date(dateString).toLocaleDateString("en-US", {
@@ -126,11 +142,10 @@ export default function AboutPage(): JSX.Element {
           throw new Error(`Failed to fetch: ${res.status}`)
         }
 
-        const text = await res.json()
-        const jsonData = text ? text : null
-        setData(jsonData)
+        const jsonData = await res.json()
+        setData(jsonData ? jsonData : null)
       } catch (error) {
-        console.error("Error fetching home data:", error)
+        console.error("Error fetching about data:", error)
       } finally {
         setIsLoading(false)
       }
@@ -149,36 +164,39 @@ export default function AboutPage(): JSX.Element {
         <h1 className="mb-0 text-4xl font-bold tracking-tight text-foreground md:text-5xl">
           <span className="text-primary">{data?.fullName || "API ERROR"}</span>
         </h1>
-        <p className="mb-6 text-chart-1">{data?.pronouns || "meow"}</p>
+        <p className="mb-6 text-chart-1">
+          {data?.pronouns || "meow"} | {calculateAge(data?.birthDate)} years
+          old
+        </p>
 
         {/* Hardcoded left-to-right layout with dots and hover tooltips */}
         <div className="flex flex-row flex-wrap items-center justify-center gap-3">
           <div className="group relative">
-            <CSharpIcon className="h-8 w-8" />
+            <CSharpIcon className="h-4 w-4" />
           </div>
 
           <span className="-my-1 text-xl text-secondary select-none">•</span>
 
           <div className="group relative">
-            <TypescriptIcon className="h-8 w-8" />
+            <TypescriptIcon className="h-4 w-4" />
           </div>
 
           <span className="-my-1 text-xl text-secondary select-none">•</span>
 
           <div className="group relative">
-            <UnityIcon className="h-8 w-8" />
+            <UnityIcon className="h-4 w-4" />
           </div>
 
           <span className="-my-1 text-xl text-secondary select-none">•</span>
 
           <div className="group relative">
-            <MysqlIcon className="h-8 w-8" />
+            <MysqlIcon className="h-4 w-4" />
           </div>
 
           <span className="-my-1 text-xl text-secondary select-none">•</span>
 
           <div className="group relative">
-            <HtmlIcon className="h-8 w-8" />
+            <HtmlIcon className="h-4 w-4" />
           </div>
         </div>
 

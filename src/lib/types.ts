@@ -22,7 +22,7 @@ export interface Experience {
 
 export interface AboutData {
   fullName?: string
-  age?: number
+  birthDate?: string // ISO 8601 date string
   pronouns?: string
   bio?: string
   jobExperiences?: Experience[]
